@@ -25,6 +25,7 @@ $scope.addShop = function() {
 
 
 
+
 $scope.removeShop = function(id) {
   console.log(id);
   $http.delete('/shop/' + id).success(function(response) {
