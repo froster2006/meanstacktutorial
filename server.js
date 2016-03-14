@@ -60,7 +60,7 @@ app.get('/groupbuy', function(req,res) {
 app.delete('/groupbuy/:id', function (req, res) {
   var id = req.params.id;
   console.log(id);
-  db.maiduo_ågroupbuy.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
+  db.maiduo_groupbuy.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
     res.json(doc);
   });
 });
