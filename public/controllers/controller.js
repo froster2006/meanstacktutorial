@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngAnimate','ui.bootstrap']);
+var myApp = angular.module('myApp', ['ngAnimate','ui.bootstrap','ngRoute']);
 
 myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, shop, gb) {
 
@@ -183,3 +183,5 @@ $scope.removeGroupbuy = function(id) {
 };
 
 }]);
+
+
