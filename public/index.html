@@ -27,7 +27,7 @@
                     <td>
                         <button class="btn btn-danger" ng-click="editShop(shop)">Edit</button>
                         <button class="btn btn-danger" ng-click="removeShop(shop._id)">Remove</button>
-                        <button class="btn btn-warning" ng-click="newGroupbuy(shop._id)">Add Group buy</button>
+                        <button class="btn btn-warning" ng-click="newGroupbuy(shop)">Add Group buy</button>
                     </td>
                 </tr>
             </tbody>
@@ -43,7 +43,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="gb in groupbuyList">
-                    <td></td>
+                    <td>{{gb.shopName}}</td>
                     <td>{{gb.title}}</td>
 
                     <td>

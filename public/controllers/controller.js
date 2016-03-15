@@ -1,17 +1,18 @@
 var myApp = angular.module('myApp', ['ngAnimate','ui.bootstrap']);
 
-myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, shop_id) {
+myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, shop) {
 
-  $scope.shopId = shop_id;
-
+  $scope.shop = shop;
+console.log($scope.shop);
   $scope.ok = function () {
-  $scope.groupbuy.shopId = $scope.shopId;
+  $scope.groupbuy.shopId = $scope.shop._id;
+  $scope.groupbuy.shopName = $scope.shop.name;
   $scope.groupbuy.status = "off";
   $scope.groupbuy.batchId = 1;
   console.log($scope.groupbuy);
   $http.post('/groupbuy', $scope.groupbuy).success(function(response) {
     console.log(response);
-    //refresh();
+
   });
     $uibModalInstance.close();
   };
@@ -62,15 +63,15 @@ var refresh = function() {
 
 refresh();
 
-$scope.newGroupbuy = function(id) {
+$scope.newGroupbuy = function(selected_shop) {
     var modalInstance = $uibModal.open({
       animation: true,
       templateUrl: 'newGroupBuy.html',
       controller: 'newGroupBuyCtrl',
       size: "lg",
       resolve: {
-        shop_id: function () {
-          return id;
+        shop: function () {
+          return selected_shop;
         }
       }
     });
