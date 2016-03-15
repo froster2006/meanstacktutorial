@@ -10,7 +10,7 @@ myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, 
     if(gb != null) 
         $scope.items = $scope.groupbuy.items;
     $scope.addItem = function () {
-        var itemToClone = { "item_name": "", "item_price": "","item_stock_count": "" };
+        var itemToClone = { "item_name": "", "item_price": "","stock_count": "" };
         $scope.items.push(itemToClone);
     };
     $scope.removeItem = function (itemIndex) {
