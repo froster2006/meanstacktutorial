@@ -79,6 +79,22 @@ app.delete('/groupbuy/:id', function (req, res) {
   });
 });
 
+app.put('/groupbuy/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  console.log(req.body);
+  db.maiduo_groupbuy.findAndModify({
+    query: {_id: mongojs.ObjectId(id)},
+    update: {$set: {title: req.body.title, description: req.body.description, photoLink: req.body.photoLink, itemName: req.body.itemName,
+        itemPrice: req.body.itemPrice
+    }},
+    new: true}, function (err, doc) {
+      res.json(doc);
+    }
+  );
+});
+
+
 /////////////////////////////////////////////////////////////////////////
 
 app.get('/contactlist', function (req, res) {

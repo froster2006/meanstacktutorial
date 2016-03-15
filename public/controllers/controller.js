@@ -1,19 +1,31 @@
 var myApp = angular.module('myApp', ['ngAnimate','ui.bootstrap']);
 
-myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, shop) {
+myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, shop, gb) {
 
-  $scope.shop = shop;
-console.log($scope.shop);
-  $scope.ok = function () {
-  $scope.groupbuy.shopId = $scope.shop._id;
-  $scope.groupbuy.shopName = $scope.shop.name;
-  $scope.groupbuy.status = "off";
-  $scope.groupbuy.batchId = 1;
-  console.log($scope.groupbuy);
-  $http.post('/groupbuy', $scope.groupbuy).success(function(response) {
-    console.log(response);
-
-  });
+    $scope.shop = shop;
+    $scope.groupbuy = gb;
+    console.log($scope.groupbuy);
+    console.log($scope.shop);
+    
+    $scope.editMode = true;
+    if(gb == null)
+        $scope.editMode = false; 
+    $scope.ok = function () {
+      if($scope.editMode) {
+        console.log($scope.groupbuy);
+        $http.put('/groupbuy/'+$scope.groupbuy._id, $scope.groupbuy).success(function(response) {
+                console.log(response);
+        });
+      } else {
+        $scope.groupbuy.shopId = $scope.shop._id;
+        $scope.groupbuy.shopName = $scope.shop.name;
+        $scope.groupbuy.status = "off";
+        $scope.groupbuy.batchId = 1;
+        console.log($scope.groupbuy);
+        $http.put('/groupbuy', $scope.groupbuy).success(function(response) {
+        console.log(response);
+      });
+     }
     $uibModalInstance.close();
   };
 
@@ -72,6 +84,9 @@ $scope.newGroupbuy = function(selected_shop) {
       resolve: {
         shop: function () {
           return selected_shop;
+        },
+        gb: function () {
+          return null;
         }
       }
     });
@@ -79,7 +94,26 @@ $scope.newGroupbuy = function(selected_shop) {
     modalInstance.result.then(function () {
      refresh();
     }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
+      //$log.info('Modal dismissed at: ' + new Date());
+    });
+};
+
+$scope.editGroupbuy = function(selected_gb) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'newGroupBuy.html',
+      controller: 'newGroupBuyCtrl',
+      size: "lg",
+      resolve: {
+        shop: function() {return null;},
+        gb: function() {return selected_gb;}
+      }
+    });
+    
+    modalInstance.result.then(function () {
+     refresh();
+    }, function () {
+      //$log.info('Modal dismissed at: ' + new Date());
     });
 };
 
@@ -97,9 +131,11 @@ $scope.newShop = function() {
     modalInstance.result.then(function () {
      refresh();
     }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
+      //$log.info('Modal dismissed at: ' + new Date());
     });
 };
+
+
 
 $scope.editShop = function(selected_shop) {
     var modalInstance = $uibModal.open({
@@ -115,7 +151,7 @@ $scope.editShop = function(selected_shop) {
     modalInstance.result.then(function () {
      refresh();
     }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
+      //$log.info('Modal dismissed at: ' + new Date());
     });
 };
 
