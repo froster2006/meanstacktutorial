@@ -6,7 +6,21 @@ myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, 
     $scope.groupbuy = gb;
     console.log($scope.groupbuy);
     console.log($scope.shop);
-    
+    //$scope.items = [
+    //{
+    //    "item_name": "",
+    //    "item_price": "",
+    //    "item_stock_count": ""
+    //}];
+    $scope.addItem = function () {
+        if($scope.groupbuy.items == null)
+            $scope.groupbuy.items = [];
+        var itemToClone = { "item_name": "", "item_price": "item.item_price","item_stock_count": "" };
+        $scope.groupbuy.items.push(itemToClone);
+    };
+    $scope.removeItem = function (itemIndex) {
+        $scope.groupbuy.items.splice(itemIndex, 1);
+    };
     $scope.editMode = true;
     if(gb == null)
         $scope.editMode = false; 
