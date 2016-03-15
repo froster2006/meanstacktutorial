@@ -22,14 +22,22 @@ myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, 
 });
 
 myApp.controller('newShopCtrl', function ($scope, $http, $uibModalInstance, shop) {
-    
+    $scope.editMode = true;
+    if(shop == null)
+        $scope.editMode = false; 
     $scope.shop = shop;
     $scope.ok = function () {
-      console.log($scope.shop);
-      $http.post('/shop', $scope.shop).success(function(response) {
-        console.log(response);
-
-  });
+      if($scope.editMode){
+          console.log($scope.shop);
+        $http.put('/shop/'+ $scope.shop._id, $scope.shop).success(function(response) {
+            console.log(response);
+         });
+      }
+      else{
+        $http.post('/shop', $scope.shop).success(function(response) {
+            console.log(response);
+         });
+      }
     $uibModalInstance.close();
   };
 

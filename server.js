@@ -12,9 +12,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
 app.get('/shop', function(req,res) {
-  console.log('list all shops');
+  //console.log('list all shops');
   db.maiduo_shop.find(function(err,docs) {
-    console.log(docs);
+    //console.log(docs);
     res.json(docs);
   });
 });
@@ -41,6 +41,20 @@ app.delete('/shop/:id', function (req, res) {
   });
 });
 
+app.put('/shop/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  console.log(req.body);
+  db.maiduo_shop.findAndModify({
+    query: {_id: mongojs.ObjectId(id)},
+    update: {$set: {name: req.body.name, email: req.body.email, phone_number: req.body.phone_number, address: req.body.address}},
+    new: true}, function (err, doc) {
+      res.json(doc);
+    }
+  );
+});
+
+
 /////////////////////////////////////////////////////////////////////////
 app.post('/groupbuy', function(req,res) {
   console.log("POST: " + req.body);
@@ -50,9 +64,9 @@ app.post('/groupbuy', function(req,res) {
 });
 
 app.get('/groupbuy', function(req,res) {
-  console.log('list all groupbuy');
+  //console.log('list all groupbuy');
   db.maiduo_groupbuy.find(function(err,docs) {
-    console.log(docs);
+    //console.log(docs);
     res.json(docs);
   });
 })

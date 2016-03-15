@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <title>Maiduo admin</title>
+    <title>Maiduo</title>
 </head>
 
 <body>
@@ -72,7 +72,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-primary" type="button" ng-click="ok()">SAVE</button>
                     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                 </div>
             </script>
@@ -81,7 +81,13 @@
         <div ng-controller="AppCtrl">
             <script type="text/ng-template" id="newShop.html">
                 <div class="modal-header">
-                    <h3 class="modal-title">New Shop</h3>
+                    <div ng-if="editMode == true">
+                        <h3 class="modal-title">Edit Shop</h3>
+                    </div>
+                    <div ng-if="editMode != true">
+                        <h3 class="modal-title">New Shop</h3>
+                    </div>
+                        
                 </div>
                 <div class="modal-body">
                     Shop name
@@ -94,7 +100,7 @@
                     <input class="form-control" ng-model="shop.address">
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
                     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                 </div>
             </script>
