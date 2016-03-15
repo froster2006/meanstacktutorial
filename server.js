@@ -85,8 +85,7 @@ app.put('/groupbuy/:id', function (req, res) {
   console.log(req.body);
   db.maiduo_groupbuy.findAndModify({
     query: {_id: mongojs.ObjectId(id)},
-    update: {$set: {title: req.body.title, description: req.body.description, photoLink: req.body.photoLink, itemName: req.body.itemName,
-        itemPrice: req.body.itemPrice
+    update: {$set: {title: req.body.title, description: req.body.description, photoLink: req.body.photoLink, items:req.body.items
     }},
     new: true}, function (err, doc) {
       res.json(doc);

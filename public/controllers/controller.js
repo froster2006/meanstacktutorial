@@ -6,26 +6,22 @@ myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, 
     $scope.groupbuy = gb;
     console.log($scope.groupbuy);
     console.log($scope.shop);
-    //$scope.items = [
-    //{
-    //    "item_name": "",
-    //    "item_price": "",
-    //    "item_stock_count": ""
-    //}];
+    $scope.items = [];
+    if(gb != null) 
+        $scope.items = $scope.groupbuy.items;
     $scope.addItem = function () {
-        if($scope.groupbuy.items == null)
-            $scope.groupbuy.items = [];
-        var itemToClone = { "item_name": "", "item_price": "item.item_price","item_stock_count": "" };
-        $scope.groupbuy.items.push(itemToClone);
+        var itemToClone = { "item_name": "", "item_price": "","item_stock_count": "" };
+        $scope.items.push(itemToClone);
     };
     $scope.removeItem = function (itemIndex) {
-        $scope.groupbuy.items.splice(itemIndex, 1);
+        $scope.items.splice(itemIndex, 1);
     };
     $scope.editMode = true;
     if(gb == null)
         $scope.editMode = false; 
     $scope.ok = function () {
       if($scope.editMode) {
+        $scope.groupbuy.items = $scope.items;
         console.log($scope.groupbuy);
         $http.put('/groupbuy/'+$scope.groupbuy._id, $scope.groupbuy).success(function(response) {
                 console.log(response);
@@ -35,8 +31,9 @@ myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, 
         $scope.groupbuy.shopName = $scope.shop.name;
         $scope.groupbuy.status = "off";
         $scope.groupbuy.batchId = 1;
+        $scope.groupbuy.items = $scope.items;
         console.log($scope.groupbuy);
-        $http.put('/groupbuy', $scope.groupbuy).success(function(response) {
+        $http.post('/groupbuy', $scope.groupbuy).success(function(response) {
         console.log(response);
       });
      }
