@@ -1,5 +1,4 @@
 # Maiduo groupbuy App
-<h2>Maiduo groupbuy App</h2>
 
 
 This repo contains the code for a RESTful API groupbuy App that was built using the MEAN stack:
