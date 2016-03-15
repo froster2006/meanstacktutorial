@@ -1,0 +1,24 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/froster2006/meanstacktutorial",
+  "authors": [
+    "froster2006 <huaningnie@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "^1.5.0",
+    "angular-bootstrap": "^1.2.4",
+    "angular": "^1.5.0",
+    "bootstrap": "^3.3.6"
+  }
+}
