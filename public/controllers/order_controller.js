@@ -11,15 +11,14 @@ myApp.config(function($routeProvider, $locationProvider) {
 
 myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route',function($scope, $http, $log, $routeParams,$route) {
     $scope.groupbuyId = $routeParams.gid;
-    $scope.order = [];
-    $scope.orderItem = [];
-    
+
     var init = function(id) {
         $http.get('/groupbuy/' + id).success(function(response) {
             $scope.groupbuy = response;
         });
-        $scope.order = [];
-        $scope.orderItem = [];
+        $scope.order = {};
+        $scope.orderItem = {};
+
     };
     init($scope.groupbuyId);
     
