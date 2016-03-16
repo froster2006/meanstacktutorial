@@ -25,6 +25,7 @@ app.post('/shop', function(req,res) {
     res.json(doc);
   });
 });
+
 app.get('/shop/:id', function (req, res) {
   var id = req.params.id;
   console.log(id);
@@ -56,12 +57,14 @@ app.put('/shop/:id', function (req, res) {
 
 
 /////////////////////////////////////////////////////////////////////////
-app.post('/groupbuy', function(req,res) {
-  console.log("POST: " + req.body);
-  db.maiduo_groupbuy.insert(req.body, function(err, doc) {
-    res.json(doc);
+app.post('/shop', function(req,res) {
+  //console.log('list all shops');
+  db.maiduo_shop.find(function(err,docs) {
+    //console.log(docs);
+    res.json(docs);
   });
 });
+
 
 app.get('/groupbuy', function(req,res) {
   //console.log('list all groupbuy');
@@ -69,7 +72,7 @@ app.get('/groupbuy', function(req,res) {
     //console.log(docs);
     res.json(docs);
   });
-})
+});
 
 app.delete('/groupbuy/:id', function (req, res) {
   var id = req.params.id;
@@ -103,6 +106,58 @@ app.get('/groupbuy/:id', function (req, res) {
 
 /////////////////////////////////////////////////////////////////////////
 
+app.post('/order', function(req,res) {
+  console.log("POST: " + req.body);
+  db.maiduo_order.insert(req.body, function(err, doc) {
+    res.json(doc);
+  });
+});
+
+app.get('/order', function(req,res) {
+  //console.log('list all groupbuy');
+  db.maiduo_order.find(function(err,docs) {
+    //console.log(docs);
+    res.json(docs);
+  });
+});
+
+app.delete('/order/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  db.maiduo_order.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
+    res.json(doc);
+  });
+});
+
+app.put('/order/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  console.log(req.body);
+  db.maiduo_order.findAndModify({
+    query: {_id: mongojs.ObjectId(id)},
+    update: {$set: {title: req.body.title, description: req.body.description, photoLink: req.body.photoLink, items:req.body.items
+    }},
+    new: true}, function (err, doc) {
+      res.json(doc);
+    }
+  );
+});
+
+app.get('/order/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  db.maiduo_order.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
+    res.json(doc);
+  });
+});
+
+app.get('/orderByGroupId/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  db.maiduo_order.findOne({groupId: mongojs.ObjectId(id)}, function (err, doc) {
+    res.json(doc);
+  });
+});
 
 
 app.listen(3000);
