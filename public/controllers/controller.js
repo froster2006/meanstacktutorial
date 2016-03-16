@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngAnimate','ui.bootstrap','ngRoute']);
+var myApp = angular.module('myApp', ['ngAnimate','ui.bootstrap']);
 
 myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, shop, gb) {
 
@@ -167,6 +167,10 @@ $scope.editShop = function(selected_shop) {
 };
 
 
+$scope.create_groupbuyURL = function(gid){
+    var order_url = "/order.html#/groupbuyId";
+    return order_url+gid;
+};
 
 $scope.removeShop = function(id) {
   console.log(id);

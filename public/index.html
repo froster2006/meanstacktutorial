@@ -44,7 +44,8 @@
             <tbody>
                 <tr ng-repeat="gb in groupbuyList">
                     <td>{{gb.shopName}}</td>
-                    <td>{{gb.title}}</td>
+
+                    <td><a ng-href="{{create_groupbuyURL(gb._id)}}">{{gb.title}}</a></td>
 
                     <td>
                         <button class="btn btn-info" ng-click="editGroupbuy(gb)">Edit</button>
