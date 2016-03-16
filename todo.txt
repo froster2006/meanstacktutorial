@@ -1,0 +1,8 @@
+Todo:
+  PHASE 1
+  - add switch button on groupbuy so user can terminate and turn on groupbuy page
+  - add text verification on order page
+  - add order confirmation view
+  - calculate total on submit in confirmation view
+  - add shop groupbuy page to see all orders, and edit
+  
