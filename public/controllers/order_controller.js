@@ -17,7 +17,7 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
             $scope.groupbuy = response;
         });
         $scope.order = {};
-        $scope.orderItem = {};
+        $scope.orderItem = [];
 
     };
     init($scope.groupbuyId);
