@@ -25,6 +25,7 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
     $scope.submit_order = function() {
         $scope.order.groupbuyId = $scope.groupbuyId;
         $scope.order.items = $scope.orderItem;
+        $scope.order.timestamp = +Date.now();
         for(i = 0;i<$scope.groupbuy.items.length;i++){
             $scope.order.items[i].item_name = $scope.groupbuy.items[i].item_name;
             $scope.order.items[i].item_price = $scope.groupbuy.items[i].item_price;
