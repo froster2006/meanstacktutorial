@@ -57,11 +57,10 @@ app.put('/shop/:id', function (req, res) {
 
 
 /////////////////////////////////////////////////////////////////////////
-app.post('/shop', function(req,res) {
-  //console.log('list all shops');
-  db.maiduo_shop.find(function(err,docs) {
-    //console.log(docs);
-    res.json(docs);
+app.post('/groupbuy', function(req,res) {
+  console.log("POST: " + req.body);
+  db.maiduo_groupbuy.insert(req.body, function(err, doc) {
+    res.json(doc);
   });
 });
 
