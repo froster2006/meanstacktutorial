@@ -26,7 +26,7 @@ then install the bower dependencies in public folder with
 
     bower install
     
-if run into connection git errors, run this before bower install
+if run into git connection errors on some repo, run this before bower install
 
     git config --global url."https://".insteadOf git://
 
