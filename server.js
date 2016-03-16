@@ -106,6 +106,7 @@ app.get('/groupbuy/:id', function (req, res) {
 /////////////////////////////////////////////////////////////////////////
 
 app.post('/order', function(req,res) {
+    console.log(req.body);
   console.log("POST: " + req.body);
   db.maiduo_order.insert(req.body, function(err, doc) {
     res.json(doc);
