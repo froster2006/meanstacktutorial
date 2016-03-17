@@ -54,5 +54,7 @@ myApp.controller('order_successCtrl', ['$scope', '$http',  '$log','$routeParams'
         });
     };
     init($scope.orderId);
+    
+
 
 }]);
