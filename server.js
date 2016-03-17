@@ -109,6 +109,7 @@ app.post('/order', function(req,res) {
     console.log(req.body);
   console.log("POST: " + req.body);
   db.maiduo_order.insert(req.body, function(err, doc) {
+    console.log(doc);
     res.json(doc);
   });
 });
