@@ -1,0 +1,39 @@
+<h1>{{groupbuy.title}}后台</h1>
+<img src="{{groupbuy.photoLink}}"></img>
+<br>
+
+<h1>Orders</h1>
+
+<br>
+
+    <div ng-repeat="item in groupbuy.items">
+        <th>{{item.item_name}}</th>
+        <th>price</th>
+    </div>
+<table class="table table-striped">
+<thead>
+    <tr>
+    <th>date</th>
+    <th>微信名</th>
+    <th>Email</th>
+    <th>Phone</th>
+    
+    <div ng-repeat="item in groupbuy.items">
+        <th>{{item.item_name}}</th>
+        <th>price</th>
+    </div>
+    </tr>
+</thead>
+<tbody>
+    <tr ng-repeat="order in orders">
+        <td>{{order.timestamp | date:'yyyy-MM-dd HH:mm'}}</td>
+        <td>{{order.name}}</td>
+        <td>{{order.email}}</td>
+        <td>{{order.phone_number}}</td>
+        <div ng-repeat="oi in order.items">
+            <td>{{oi.item_count}}</td>
+            <td>{{oi.item_price}}</td>
+        </div>
+    </tr>
+</tbody>
+</table>

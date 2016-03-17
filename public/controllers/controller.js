@@ -186,6 +186,12 @@ $scope.removeGroupbuy = function(id) {
   });
 };
 
+$scope.gotoGroupbuyOrders = function(id) {
+    var shop_groupbuy_url = '/shop.html#/groupbuyId';
+    window.location.href = shop_groupbuy_url+id;
+    
+};
+
 }]);
 
 
