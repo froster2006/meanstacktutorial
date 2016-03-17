@@ -7,7 +7,7 @@
 <br>
 
 
-<table class="table table-striped">
+<table class="table table-striped table-responsive">
 <thead>
     <tr>
     <th>date</th>
@@ -16,6 +16,7 @@
     <th>Phone</th>
     <th ng-repeat-start="item in groupbuy.items">{{item.item_name}}</th>
     <th ng-repeat-end>price</th>
+    <th>Action</th>
     </tr>
 </thead>
 <tbody>
@@ -26,6 +27,11 @@
         <td>{{order.phone_number}}</td>
         <td ng-repeat-start="oi in order.items">{{oi.item_count}}</td>
         <td ng-repeat-end>{{oi.item_price}}</td>
+        <td>
+            <button class="btn btn-info" ng-click="editOrder(order)">Edit</button>
+            <button class="btn btn-info" ng-click="pickupOrder(order_id)">Pick up</button>
+            <button class="btn btn-danger" ng-click="removeOrder(order_id)">Remove</button>
+        </td>
     </tr>
 </tbody>
 </table>
