@@ -17,13 +17,14 @@ myApp.config(function($routeProvider, $locationProvider) {
 myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route',function($scope, $http, $log, $routeParams,$route) {
     $scope.groupbuyId = $routeParams.gid;
     var init = function(id) {
-        $http.get('/groupbuy/' + id).success(function(response) {
-            $scope.groupbuy = response;
-        });
         $scope.order = {};
         $scope.orderItem = [];
-        
-
+        $scope.groupbuyON = true;
+        $http.get('/groupbuy/' + id).success(function(response) {
+            $scope.groupbuy = response;
+            if($scope.groupbuy.status === 'off')
+                $scope.groupbuyON = false;
+        });
 
     };
     init($scope.groupbuyId);
@@ -32,6 +33,8 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
         $scope.order.groupbuyId = $scope.groupbuyId;
         $scope.order.items = $scope.orderItem;
         $scope.order.timestamp = +Date.now();
+        $scope.order.pickedup = false;
+        $scope.order.batchId = $scope.groupbuy.batchId;
         for(i = 0;i<$scope.groupbuy.items.length;i++){
             $scope.order.items[i].item_name = $scope.groupbuy.items[i].item_name;
             $scope.order.items[i].item_price = $scope.groupbuy.items[i].item_price;
