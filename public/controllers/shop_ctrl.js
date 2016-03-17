@@ -23,5 +23,25 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
     };
     init($scope.groupbuyId);
 
+    $scope.removeOrder = function(id) 
+    {
+        
+    };
+    
+    $scope.pickupOrder = function(id) 
+    {
+        
+    };
+    
+    $scope.editOrder = function(selected_gb) 
+    {
+        
+    };
+    
+    $scope.refresh = function() {
+        
+        
+    };
+
 }]);
 
