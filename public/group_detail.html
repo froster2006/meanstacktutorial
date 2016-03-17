@@ -6,10 +6,7 @@
 
 <br>
 
-    <div ng-repeat="item in groupbuy.items">
-        <th>{{item.item_name}}</th>
-        <th>price</th>
-    </div>
+
 <table class="table table-striped">
 <thead>
     <tr>
@@ -17,11 +14,8 @@
     <th>微信名</th>
     <th>Email</th>
     <th>Phone</th>
-    
-    <div ng-repeat="item in groupbuy.items">
-        <th>{{item.item_name}}</th>
-        <th>price</th>
-    </div>
+    <th ng-repeat-start="item in groupbuy.items">{{item.item_name}}</th>
+    <th ng-repeat-end>price</th>
     </tr>
 </thead>
 <tbody>
@@ -30,10 +24,8 @@
         <td>{{order.name}}</td>
         <td>{{order.email}}</td>
         <td>{{order.phone_number}}</td>
-        <div ng-repeat="oi in order.items">
-            <td>{{oi.item_count}}</td>
-            <td>{{oi.item_price}}</td>
-        </div>
+        <td ng-repeat-start="oi in order.items">{{oi.item_count}}</td>
+        <td ng-repeat-end>{{oi.item_price}}</td>
     </tr>
 </tbody>
 </table>
