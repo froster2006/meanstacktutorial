@@ -154,8 +154,6 @@ app.get('/order/:id', function (req, res) {
 
 app.get('/orderByGroupbuyId/:id', function (req, res) {
   var id = req.params.id;
-  console.log("orderByGroupbuyId");
-  console.log(id);
   db.maiduo_order.find({groupbuyId: id}, function (err, doc) {
     res.json(doc);
   });

@@ -25,23 +25,30 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
 
     $scope.removeOrder = function(id) 
     {
-        
+        $http.delete('/order/' + id).success(function(response) {
+            $scope.orders = response;
+        });
+        $scope.refresh();
     };
     
     $scope.pickupOrder = function(id) 
     {
-        
+        $scope.refresh();
     };
     
     $scope.editOrder = function(selected_gb) 
     {
-        
+        $scope.refresh();
     };
     
     $scope.refresh = function() {
-        
+        $http.get('/orderByGroupbuyId/' + $scope.groupbuyId).success(function(response) {
+            $scope.orders = response;
+        });
+    };
+    $scope.addOrder = function()
+    {
         
     };
-
 }]);
 

@@ -1,9 +1,9 @@
 <h1>{{groupbuy.title}}后台</h1>
-<img src="{{groupbuy.photoLink}}"></img>
 <br>
 
 <h1>Orders</h1>
-
+<button class="btn btn-info" ng-click="refresh()">Refresh</button>
+<button class="btn btn-danger" ng-click="addOrder()">Add Order</button>
 <br>
 
 
@@ -13,9 +13,9 @@
     <th>date</th>
     <th>微信名</th>
     <th>Email</th>
-    <th>Phone</th>
+    <th>电话</th>
     <th ng-repeat-start="item in groupbuy.items">{{item.item_name}}</th>
-    <th ng-repeat-end>price</th>
+    <th ng-repeat-end>单价</th>
     <th>Action</th>
     </tr>
 </thead>
@@ -29,9 +29,46 @@
         <td ng-repeat-end>{{oi.item_price}}</td>
         <td>
             <button class="btn btn-info" ng-click="editOrder(order)">Edit</button>
-            <button class="btn btn-info" ng-click="pickupOrder(order_id)">Pick up</button>
-            <button class="btn btn-danger" ng-click="removeOrder(order_id)">Remove</button>
+            <button class="btn btn-info" ng-click="pickupOrder(order._id)" ng-disabled="order.pickup">Pick up</button>
+            <button class="btn btn-danger" ng-click="removeOrder(order._id)">Remove</button>
         </td>
     </tr>
 </tbody>
 </table>
+
+
+        <!-- Modal -->
+        <div ng-controller="shopCtrl">
+            <script type="text/ng-template" id="newOrder.html">
+                <div class="modal-header">
+                    <div ng-if="editMode == true">
+                        <h3 class="modal-title">Edit Order</h3>
+                    </div>
+                    <div ng-if="editMode != true">
+                        <h3 class="modal-title">New Order</h3>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    Title
+                    <input class="form-control" ng-model="groupbuy.title"> 
+                    Description
+                    <input class="form-control" ng-model="groupbuy.description">
+                    Photo link
+                    <input class="form-control" ng-model="groupbuy.photoLink">
+                    <div data-ng-repeat="item in items">
+                        item name
+                        <input class="form-control" ng-model="items[$index].item_name">
+                        price
+                        <input class="form-control" ng-model="items[$index].item_price">
+                        count
+                        <input class="form-control" ng-model="items[$index].stock_count">
+                        <button ng-click="removeItem($index)" class="btn btn-danger">Delete Item</button>
+                    </div>
+                     
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">SAVE</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+        </div>
