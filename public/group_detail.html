@@ -16,6 +16,7 @@
     <th>电话</th>
     <th ng-repeat-start="item in groupbuy.items">{{item.item_name}}</th>
     <th ng-repeat-end>单价</th>
+    <th>备注</th>
     <th>Action</th>
     </tr>
 </thead>
@@ -27,6 +28,7 @@
         <td>{{order.phone_number}}</td>
         <td ng-repeat-start="oi in order.items">{{oi.item_count}}</td>
         <td ng-repeat-end>{{oi.item_price}}</td>
+        <td>{{order.notes}}</td>
         <td>
             <button class="btn btn-info" ng-click="editOrder(order)">Edit</button>
             <button class="btn btn-info" ng-click="pickupOrder(order._id)" ng-disabled="order.pickup">Pick up</button>
@@ -37,38 +39,36 @@
 </table>
 
 
-        <!-- Modal -->
-        <div ng-controller="shopCtrl">
-            <script type="text/ng-template" id="newOrder.html">
-                <div class="modal-header">
-                    <div ng-if="editMode == true">
-                        <h3 class="modal-title">Edit Order</h3>
-                    </div>
-                    <div ng-if="editMode != true">
-                        <h3 class="modal-title">New Order</h3>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    Title
-                    <input class="form-control" ng-model="groupbuy.title"> 
-                    Description
-                    <input class="form-control" ng-model="groupbuy.description">
-                    Photo link
-                    <input class="form-control" ng-model="groupbuy.photoLink">
-                    <div data-ng-repeat="item in items">
-                        item name
-                        <input class="form-control" ng-model="items[$index].item_name">
-                        price
-                        <input class="form-control" ng-model="items[$index].item_price">
-                        count
-                        <input class="form-control" ng-model="items[$index].stock_count">
-                        <button ng-click="removeItem($index)" class="btn btn-danger">Delete Item</button>
-                    </div>
-                     
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" ng-click="ok()">SAVE</button>
-                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                </div>
-            </script>
+<!-- Modal -->
+<div ng-controller="shopCtrl">
+    <script type="text/ng-template" id="newOrder.html">
+        <div class="modal-header">
+            <div ng-if="editMode == true">
+                <h3 class="modal-title">Edit Order</h3>
+            </div>
+            <div ng-if="editMode != true">
+                <h3 class="modal-title">New Order</h3>
+            </div>
         </div>
+        <div class="modal-body">
+            <h2>{{groupbuy.title}}</h2>
+
+            微信名字
+            <input class="form-control" ng-model="order.name"> 
+            E-mail
+            <input class="form-control" ng-model="order.email"> 
+            电话(xxx-xxx-xxxx)
+            <input class="form-control" ng-model="order.phone_number">
+            
+            <div data-ng-repeat="item in groupbuy.items">
+                {{item.item_name}} price: {{item.item_price}}<br>
+                订购数量: <input class="form-control" ng-model="orderItem[$index].item_count">
+            </div>
+            备注
+            <input class="form-control" ng-model="order.notes">
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">SAVE</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>

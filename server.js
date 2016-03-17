@@ -136,7 +136,7 @@ app.put('/order/:id', function (req, res) {
   console.log(req.body);
   db.maiduo_order.findAndModify({
     query: {_id: mongojs.ObjectId(id)},
-    update: {$set: {title: req.body.title, description: req.body.description, photoLink: req.body.photoLink, items:req.body.items
+    update: {$set: {name: req.body.name, email: req.body.email, phone_number: req.body.phone_number, notes:req.body.notes,items: req.body.items
     }},
     new: true}, function (err, doc) {
       res.json(doc);
