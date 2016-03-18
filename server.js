@@ -95,6 +95,18 @@ app.put('/groupbuy/:id', function (req, res) {
   );
 });
 
+app.put('/togglegroupbuy/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(req.body);
+  db.maiduo_groupbuy.findAndModify({
+    query: {_id: mongojs.ObjectId(id)},
+    update: {$set: {status: req.body.status}},
+    new: true}, function (err, doc) {
+      res.json(doc);
+    }
+  );
+});
+
 app.get('/groupbuy/:id', function (req, res) {
   var id = req.params.id;
   console.log(id);
@@ -138,6 +150,19 @@ app.put('/order/:id', function (req, res) {
     query: {_id: mongojs.ObjectId(id)},
     update: {$set: {name: req.body.name, email: req.body.email, phone_number: req.body.phone_number, notes:req.body.notes,items: req.body.items
     }},
+    new: true}, function (err, doc) {
+      res.json(doc);
+    }
+  );
+});
+
+app.put('/pickuporder/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  console.log(req.body);
+  db.maiduo_order.findAndModify({
+    query: {_id: mongojs.ObjectId(id)},
+    update: {$set: {pickedup: true}},
     new: true}, function (err, doc) {
       res.json(doc);
     }

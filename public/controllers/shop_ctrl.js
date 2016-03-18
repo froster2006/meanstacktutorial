@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute','ngAnimate','ui.bootstrap']);
+var myApp = angular.module('myApp', ['ngRoute','ngAnimate','ui.bootstrap','toggle-switch']);
 
 myApp.config(function($routeProvider, $locationProvider) {
   $routeProvider
@@ -11,17 +11,33 @@ myApp.config(function($routeProvider, $locationProvider) {
 
 myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route','$uibModal',function($scope, $http, $log, $routeParams,$route,$uibModal) {
     $scope.groupbuyId = $routeParams.gid;
-
+    
     var init = function(id) {
         $http.get('/groupbuy/' + id).success(function(response) {
             $scope.groupbuy = response;
+            if($scope.groupbuy.status === "off")
+                $scope.switchStatus = false;
+            else
+                $scope.switchStatus = true;
         });
     
         $http.get('/orderByGroupbuyId/' + id).success(function(response) {
             $scope.orders = response;
         });
+        
     };
     init($scope.groupbuyId);
+
+    $scope.toggle = function()
+    {
+        var status = {"status":"on"};
+        if($scope.switchStatus === false)
+            status = {"status":"off"};
+        $http.put('/togglegroupbuy/' + $scope.groupbuy._id, status).success(function(response) {
+            
+        });
+        $scope.refresh();
+    }
 
     $scope.removeOrder = function(id) 
     {
@@ -33,6 +49,9 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
     
     $scope.pickupOrder = function(id) 
     {
+        $http.put('/pickuporder/' + id ).success(function(response) {
+
+        });
         $scope.refresh();
     };
     
