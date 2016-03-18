@@ -29,9 +29,7 @@
     
     <div data-ng-repeat="item in groupbuy.items">
         {{item.item_name}} 价格: {{item.item_price}}<br>
-        <input class="form-control" ng-model="orderItem[$index].item_count" placeholder="订购数量">
-        <slider ng-model="sliders.sliderValue" min="testOptions.min" step="testOptions.step" max="testOptions.max" value="testOptions.value"></slider>
-        {{testOptions.value}}
+        <input class="form-control" ng-model="orderItem[$index].item_count" placeholder="订购数量" value = 0>
     </div>
     备注
     <input class="form-control" ng-model="order.notes">
