@@ -31,12 +31,16 @@
             
             <div data-ng-repeat="item in groupbuy.items">
                 {{item.item_name}} 价格: {{item.item_price}}<br>
-                <input class="form-contrl" type="text" ng-model="orderItem[$index].item_count" placeholder="订购数量"><br><br>
+                <input class="form-contrl" type="text" ng-init="orderItem[$index].item_count=0" value=0 ng-model="orderItem[$index].item_count" placeholder="订购数量"><br><br>
             </div>
 
             备注<br>
             <input class="form-contrl" type="text" ng-model="order.notes">
             <br><br>
+            <div role="alert">
+                <span class="label label-danger" ng-show="hasError">{{submit_check_message}}</span>
+            </div>
+            <br>
         <button class="btn btn-primary btn-lg" type="button" ng-click="submit_order()">提交订单</button>
         <br>
         <br>

@@ -20,6 +20,7 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
         $scope.order = {};
         $scope.orderItem = [];
         $scope.groupbuyON = true;
+        $scope.hasError = false;
         $http.get('/groupbuy/' + id).success(function(response) {
             $scope.groupbuy = response;
             if($scope.groupbuy.status === 'off')
@@ -31,21 +32,35 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
     init($scope.groupbuyId);
 
     $scope.submit_order = function() {
+        $scope.submit_check_message="";
+        $scope.hasError = false;
         $scope.order.groupbuyId = $scope.groupbuyId;
         $scope.order.items = $scope.orderItem;
         $scope.order.timestamp = +Date.now();
         $scope.order.pickedup = false;
         $scope.order.batchId = $scope.groupbuy.batchId;
-        //for(i = 0;i<$scope.groupbuy.items.length;i++){
-         //   $scope.order.items[i].item_name = $scope.groupbuy.items[i].item_name;
-         //   $scope.order.items[i].item_price = $scope.groupbuy.items[i].item_price;
-        //}
-        console.log($scope.order);
-        $http.post('/order', $scope.order).success(function(response) {
-            console.log(response._id);
-            var order_url = '#/orderSubmitSuccess';
-            window.location.href = order_url+response._id;
-         });
+        var total_count = 0;
+        for(i = 0;i<$scope.order.items.length;i++){
+            total_count += $scope.order.items[i].item_count;
+        }
+        //console.log($scope.order);
+        $scope.submit_check_message="";
+        if(total_count === 0){
+            $scope.submit_check_message="订单数不能为0";
+            $scope.hasError = true;
+        }
+        else if($scope.order.name ==="" || $scope.order.name === null || 
+            $scope.order.phone_number ==="" || $scope.order.phone_number == null ) {
+            $scope.submit_check_message="请填写微信名及电话";
+            $scope.hasError = true;
+        }
+        else{
+            $http.post('/order', $scope.order).success(function(response) {
+                console.log(response._id);
+                var order_url = '#/orderSubmitSuccess';
+                window.location.href = order_url+response._id;
+             });
+        }
     };
     
 }]);
