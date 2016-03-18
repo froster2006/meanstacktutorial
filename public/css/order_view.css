@@ -1,0 +1,7 @@
+body {
+    background-color: lightyellow;
+}
+
+input[type="text"] {
+    font-size:25px
+}

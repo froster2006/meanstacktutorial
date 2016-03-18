@@ -24,6 +24,7 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
             $scope.groupbuy = response;
             if($scope.groupbuy.status === 'off')
                 $scope.groupbuyON = false;
+            $scope.orderItem = $scope.groupbuy.items;
         });
 
     };
@@ -35,10 +36,10 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
         $scope.order.timestamp = +Date.now();
         $scope.order.pickedup = false;
         $scope.order.batchId = $scope.groupbuy.batchId;
-        for(i = 0;i<$scope.groupbuy.items.length;i++){
-            $scope.order.items[i].item_name = $scope.groupbuy.items[i].item_name;
-            $scope.order.items[i].item_price = $scope.groupbuy.items[i].item_price;
-        }
+        //for(i = 0;i<$scope.groupbuy.items.length;i++){
+         //   $scope.order.items[i].item_name = $scope.groupbuy.items[i].item_name;
+         //   $scope.order.items[i].item_price = $scope.groupbuy.items[i].item_price;
+        //}
         console.log($scope.order);
         $http.post('/order', $scope.order).success(function(response) {
             console.log(response._id);
