@@ -54,7 +54,13 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
         });
         $scope.refresh();
     };
-    
+    $scope.highlightRow = function(order)
+    {
+        if(order.pickedup)
+            return "success";
+        else
+            return "";
+    }
     $scope.editOrder = function(selected_order) 
     {
         var modalInstance = $uibModal.open({
