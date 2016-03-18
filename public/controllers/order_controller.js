@@ -28,7 +28,7 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
 
     };
     init($scope.groupbuyId);
-    
+
     $scope.submit_order = function() {
         $scope.order.groupbuyId = $scope.groupbuyId;
         $scope.order.items = $scope.orderItem;
