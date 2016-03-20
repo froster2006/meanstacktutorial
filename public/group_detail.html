@@ -67,7 +67,12 @@
             
             <div data-ng-repeat="item in groupbuy.items">
                 {{item.item_name}} price: {{item.item_price}}<br>
-                订购数量: <input class="form-control" ng-init="orderItem[$index].item_count=0" value=0 ng-model="orderItem[$index].item_count">
+                <div ng-if="editMode == true">
+                    订购数量: <input class="form-control" ng-model="orderItem[$index].item_count">
+                </div>
+                <div ng-if="editMode == false">
+                    订购数量: <input class="form-control" ng-init="orderItem[$index].item_count=0" value=0 ng-model="orderItem[$index].item_count">
+                </div>
             </div>
             备注
             <input class="form-control" ng-model="order.notes">
