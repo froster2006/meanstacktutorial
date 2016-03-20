@@ -86,6 +86,7 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
         $http.get('/orderByGroupbuyId/' + $scope.groupbuyId).success(function(response) {
             $scope.orders = response;
         });
+        $scope.tableInit();
     };
     $scope.addOrder = function()
     {
@@ -106,6 +107,11 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
           //$log.info('Modal dismissed at: ' + new Date());
         });
     };
+
+    $scope.tableInit = function()
+    {
+        $scope.totalOrderItemCount = {};
+    }
 
 }]);
 
