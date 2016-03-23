@@ -20,8 +20,7 @@
     <th>微信名</th>
     <th>Email</th>
     <th>电话</th>
-    <th ng-repeat-start="item in groupbuy.items">{{item.item_name}}</th>
-    <th ng-repeat-end>单价</th>
+    <th ng-repeat-start="item in groupbuy.items" ng-repeat-end>{{item.item_name}}</th>
     <th>备注</th>
     <th>Action</th>
     </tr>
@@ -32,8 +31,8 @@
         <td>{{order.name}}</td>
         <td>{{order.email}}</td>
         <td>{{order.phone_number}}</td>
-        <td ng-repeat-start="oi in order.items" ng-init="totalOrderItemCount[oi.item_name] = +totalOrderItemCount[oi.item_name] + +oi.item_count" >{{oi.item_count}}</td>
-        <td ng-repeat-end>{{oi.item_price}}</td>
+        <td ng-repeat-start="oi in order.items" ng-init="totalOrderItemCount[oi.item_name] = +totalOrderItemCount[oi.item_name] + +oi.item_count" ng-repeat-end>
+            {{oi.item_count}}</td>
         <td>{{order.notes}}</td>
         <td>
             <button class="btn btn-info" ng-click="editOrder(order)">Edit</button>
@@ -46,8 +45,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td ng-repeat-start="soi in totalOrderItemCount">{{soi}}</td>
-        <td ng-repeat-end></td>
+        <td ng-repeat-start="soi in totalOrderItemCount" ng-repeat-end>{{soi}}</td>
         <td></td>
         <td></td>
     </tr>
