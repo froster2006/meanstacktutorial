@@ -169,6 +169,21 @@ app.put('/pickuporder/:id', function (req, res) {
   );
 });
 
+app.put('/unpickuporder/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  console.log(req.body);
+  db.maiduo_order.findAndModify({
+    query: {_id: mongojs.ObjectId(id)},
+    update: {$set: {pickedup: false}},
+    new: true}, function (err, doc) {
+      res.json(doc);
+    }
+  );
+});
+
+
+
 app.get('/order/:id', function (req, res) {
   var id = req.params.id;
   console.log(id);

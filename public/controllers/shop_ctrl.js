@@ -154,4 +154,11 @@ myApp.controller('newOrderCtrl', function ($scope, $http, $uibModalInstance, gb,
         $uibModalInstance.dismiss('cancel');
     };
 
+    $scope.unpickup = function () {
+        $http.put('/unpickuporder/' + $scope.order._id ).success(function(response) {
+
+        });
+        $uibModalInstance.close();
+    };
+
 });
