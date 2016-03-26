@@ -30,7 +30,6 @@ myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, 
         $scope.groupbuy.shopId = $scope.shop._id;
         $scope.groupbuy.shopName = $scope.shop.name;
         $scope.groupbuy.status = "off";
-        $scope.groupbuy.batchId = 1;
         $scope.groupbuy.items = $scope.items;
         console.log($scope.groupbuy);
         $http.post('/groupbuy', $scope.groupbuy).success(function(response) {

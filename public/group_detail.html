@@ -4,6 +4,10 @@
 <button class="btn btn-info" ng-click="refresh()">刷新</button>
 <button class="btn btn-danger" ng-click="addOrder()">添加订单</button>
 <toggle-switch class="switch-success" ng-model="switchStatus" ng-click="toggle()"></toggle-switch>
+
+<span class="text">批次</span><select ng-model="selectedBatchId" ng-change="refresh()" >
+    <option ng-repeat="bid in groupbuyBatchIdArray" value="{{bid}}">{{bid}}</option>
+</select>
 <br><br>
 <div class="col-sm-3 col-md-3 input-group">
     <input type="text" class="form-control" placeholder="请输入电话后四位..." ng-model="searchPhone">
@@ -84,6 +88,10 @@
             </div>
             备注
             <input class="form-control" ng-model="order.notes">
+            批次 
+            <select ng-model="selectedBatchId">
+                <option ng-repeat="bid in gbBatchIds" value="{{bid}}">{{bid}}</option>
+            </select>
         <div class="modal-footer"> 
             <div ng-if="editMode == true && order.pickedup == true" style="float:left">
                 <button class="btn btn-danger" type="button" ng-click="unpickup()">恢复提货</button>
