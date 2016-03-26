@@ -78,17 +78,21 @@
                     <input class="form-control" ng-model="groupbuy.batchId">
                     <div data-ng-repeat="item in items">
                         item name
-                        <input class="form-control" ng-model="items[$index].item_name">
+                        <input class="form-control" ng-model="items[$index].item_name" ng-disabled="editMode">
                         price
                         <input class="form-control" ng-model="items[$index].item_price">
                         stock count
                         <input class="form-control" ng-model="items[$index].stock_count">
-                        <button ng-click="removeItem($index)" class="btn btn-danger">Delete Item</button>
+                        <div ng-if="editMode != true">
+                            <button ng-click="removeItem($index)" class="btn btn-danger">Delete Item</button>
+                        </div>
                     </div>
                      
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" ng-click="addItem()">Add Item</button>  
+                    <div ng-if="editMode != true" style="float:left">
+                        <button class="btn btn-warning" type="button" ng-click="addItem()">Add Item</button> 
+                    </div>
                     <button class="btn btn-primary" type="button" ng-click="ok()">SAVE</button>
                     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                 </div>
