@@ -43,15 +43,14 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
         for(i = 0;i<$scope.order.items.length;i++){
             total_count += $scope.order.items[i].item_count;
         }
-        //console.log($scope.order);
+        console.log($scope.order);
         $scope.submit_check_message="";
         if(total_count === 0){
             $scope.submit_check_message="订单数不能为0";
             $scope.hasError = true;
         }
-        else if($scope.order.name ==="" || $scope.order.name === null || 
-            $scope.order.phone_number ==="" || $scope.order.phone_number == null ) {
-            $scope.submit_check_message="请填写微信名及电话";
+        else if(typeof($scope.order.name) === 'undefined' || $scope.order.name === "") {
+            $scope.submit_check_message="请填写微信名";
             $scope.hasError = true;
         }
         else{
