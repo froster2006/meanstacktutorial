@@ -104,7 +104,7 @@ $scope.newGroupbuy = function(selected_shop) {
     modalInstance.result.then(function () {
      refresh();
     }, function () {
-      //$log.info('Modal dismissed at: ' + new Date());
+      
     });
 };
 
@@ -124,6 +124,7 @@ $scope.editGroupbuy = function(selected_gb) {
      refresh();
     }, function () {
       //$log.info('Modal dismissed at: ' + new Date());
+      
     });
 };
 
@@ -142,6 +143,7 @@ $scope.newShop = function() {
      refresh();
     }, function () {
       //$log.info('Modal dismissed at: ' + new Date());
+      
     });
 };
 
@@ -162,6 +164,7 @@ $scope.editShop = function(selected_shop) {
      refresh();
     }, function () {
       //$log.info('Modal dismissed at: ' + new Date());
+      
     });
 };
 
@@ -174,8 +177,9 @@ $scope.create_groupbuyURL = function(gid){
 $scope.removeShop = function(id) {
   console.log(id);
   $http.delete('/shop/' + id).success(function(response) {
-    refresh();
-  });
+
+  }); 
+  refresh();
 };
 
 $scope.removeGroupbuy = function(id) {

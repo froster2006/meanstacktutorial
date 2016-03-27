@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute','angularNumberPicker']);
 
 myApp.config(function($routeProvider, $locationProvider) {
   $routeProvider
@@ -62,7 +62,7 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
              });
         }
     };
-    
+
 }]);
 
 myApp.controller('order_successCtrl', ['$scope', '$http',  '$log','$routeParams','$route',function($scope, $http, $log, $routeParams,$route) {
