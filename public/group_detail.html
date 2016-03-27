@@ -29,7 +29,7 @@
     </tr>
 </thead>
 <tbody>
-    <tr ng-repeat="order in orders |orderBy:timestamp |filter:{phone_number:searchPhone}" ng-class="highlightRow(order)">
+    <tr ng-repeat="order in orders |orderBy:'timestamp' |filter:{phone_number:searchPhone}" ng-class="highlightRow(order)">
         <td>{{order.timestamp | date:'yyyy-MM-dd HH:mm'}}</td>
         <td>{{order.name}}</td>
         <td>{{order.email}}</td>
