@@ -44,11 +44,16 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
         $scope.refresh();
     }
 
-    $scope.removeOrder = function(id) 
+    $scope.removeOrder = function(order) 
     {
-        $http.delete('/order/' + id).success(function(response) {
-            $scope.orders = response;
-        });
+        var msg = "请确认删除"+order.name+"的订单";
+        var r = confirm(msg);
+        if (r == true) {
+            $http.delete('/order/' + order._id).success(function(response) {
+                $scope.orders = response;
+            });
+        } 
+
         $scope.refresh();
     };
     
