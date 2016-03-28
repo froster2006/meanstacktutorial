@@ -25,13 +25,13 @@
             微信名字<span class="star">&#x2605</span><br>
             <input class="form-contrl" type="text" ng-model="order.name"><br><br>
             E-mail (选填)<br>
-            <input class="form-contrl" type="text" ng-model="order.email"> <br><br>
+            <input class="form-contrl" type="email" ng-model="order.email"> <br><br>
             电话<span class="star">&#x2605</span><br>
-            <input class="form-contrl" type="text" ng-model="order.phone_number"><br><br>
+            <input class="form-contrl" type="tel" ng-model="order.phone_number"><br><br>
             
             <div data-ng-repeat="item in groupbuy.items">
                 {{item.item_name}} 价格: {{item.item_price}}<br>
-                <input class="form-contrl" type="text" ng-init="orderItem[$index].item_count=0" value=0 ng-model="orderItem[$index].item_count" placeholder="订购数量"><br><br>
+                <input class="form-contrl" type="tel" ng-init="orderItem[$index].item_count=0" value=0 ng-model="orderItem[$index].item_count" placeholder="订购数量"><br><br>
             </div>
 
             备注<br>
