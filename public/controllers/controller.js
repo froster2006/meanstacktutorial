@@ -71,7 +71,6 @@ myApp.controller('newShopCtrl', function ($scope, $http, $uibModalInstance, shop
 
 
 myApp.controller('AppCtrl', ['$scope', '$http', '$uibModal', '$log',function($scope, $http, $uibModal, $log) {
-
 var refresh = function() {
   $http.get('/shop').success(function(response) {
     $scope.shopList = response;
@@ -164,6 +163,27 @@ $scope.editShop = function(selected_shop) {
       //$log.info('Modal dismissed at: ' + new Date());
     });
 };
+$scope.removeShop = function(id) {
+  console.log(id);
+  var msg = "请确认删除这个厨房";
+  var r = confirm(msg);
+  if (r == true) {
+    $http.delete('/shop/' + id).success(function(response) {
+      refresh();
+    });
+  }
+};
+
+$scope.removeGroupbuy = function(id) {
+  console.log(id);
+  var msg = "请确认删除这个团购";
+  var r = confirm(msg);
+  if (r == true) {
+    $http.delete('/groupbuy/' + id).success(function(response) {
+      refresh();
+    });
+  }
+};
 
 
 $scope.create_groupbuyURL = function(gid){
@@ -171,26 +191,15 @@ $scope.create_groupbuyURL = function(gid){
     return order_url+gid;
 };
 
-$scope.removeShop = function(id) {
-  console.log(id);
-  $http.delete('/shop/' + id).success(function(response) {
-    refresh();
-  });
-};
 
-$scope.removeGroupbuy = function(id) {
-  console.log(id);
-  $http.delete('/groupbuy/' + id).success(function(response) {
-    refresh();
-  });
-};
 
 $scope.gotoGroupbuyOrders = function(id) {
     var shop_groupbuy_url = '/shop.html#/groupbuyId';
-    window.location.href = shop_groupbuy_url+id;
-    
+    window.location.href = shop_groupbuy_url+id;   
 };
 
+
 }]);
+
 
 
