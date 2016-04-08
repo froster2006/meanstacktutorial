@@ -27,6 +27,14 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
                 $scope.selectedBatchId=$scope.groupbuyBatchIdArray[0];
                 $http.get('/orderBybatchId/' + id+ '/'+$scope.selectedBatchId).success(function(response) {
                     $scope.orders = response;
+                    $scope.wechat_msg ="";
+                    for(var i = 0;i<$scope.orders.length;i++)
+                    {
+                        if(!$scope.orders[i].pickedup)
+                            $scope.wechat_msg +="@" + $scope.orders[i].name + " ";
+                    }
+                    if($scope.wechat_msg !="")
+                        $scope.wechat_msg +="可以来提货了 谢谢";
                 });
             });
         });
@@ -60,9 +68,9 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
     $scope.pickupOrder = function(id) 
     {
         $http.put('/pickuporder/' + id ).success(function(response) {
-
+            $scope.refresh();
         });
-        $scope.refresh();
+        
     };
     $scope.highlightRow = function(order)
     {
@@ -95,10 +103,22 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
     };
     
     $scope.refresh = function() {
+
         $http.get('/orderBybatchId/' + $scope.groupbuy._id+ '/'+$scope.selectedBatchId).success(function(response) {
                 $scope.orders = response;
+                $scope.wechat_msg ="";
+                for(var i = 0;i<$scope.orders.length;i++) {
+                    if(!$scope.orders[i].pickedup)
+                        $scope.wechat_msg +="@" + $scope.orders[i].name + " ";
+                }
+                if($scope.wechat_msg !="")
+                    $scope.wechat_msg +="可以来提货了 谢谢";
         });
         $scope.tableInit();
+    };
+    $scope.selectTextArea =function($event)
+    {
+         $event.target.select();
     };
     $scope.addOrder = function()
     {
