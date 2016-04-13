@@ -160,7 +160,7 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
     });
     
     modalInstance.result.then(function () {
-        $scope.refresh();
+        init($scope.groupbuyId);
     }, function () {
       //$log.info('Modal dismissed at: ' + new Date());
     });
