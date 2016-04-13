@@ -41,6 +41,11 @@ myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route'
     };
     init($scope.groupbuyId);
 
+    $scope.create_groupbuyURL = function(){
+        var order_url = "/order.html#/groupbuyId";
+        return order_url+$scope.groupbuyId;
+    };
+
     $scope.toggle = function()
     {
         var status = {"status":"on"};
