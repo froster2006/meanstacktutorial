@@ -111,6 +111,13 @@ app.get('/groupbuy/:id', function (req, res) {
   });
 });
 
+app.get('/groupbuyByShopId/:id', function (req, res) {
+  var id = req.params.id;
+  //console.log(id);
+  db.maiduo_groupbuy.find({shopId: id}, function (err, doc) {
+    res.json(doc);
+  });
+});
 
 /////////////////////////////////////////////////////////////////////////
 

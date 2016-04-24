@@ -1,4 +1,121 @@
-var myApp = angular.module('myApp', ['ngAnimate','ui.bootstrap']);
+var myApp = angular.module('myApp', ['ngRoute','ngAnimate','ui.bootstrap','toggle-switch']);
+
+myApp.config(function($routeProvider, $locationProvider) {
+  $routeProvider
+   .when('/groupbuyId:gid', {
+        templateUrl: 'group_detail.html',
+        controller: 'gbCtrl'
+  })
+   .when('/shopId:shopId', {
+        templateUrl: 'shop_detail.html',
+        controller: 'shopCtrl'   
+
+   });
+});
+
+
+myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route','$uibModal',function($scope, $http, $log, $routeParams,$route,$uibModal) {
+    $scope.shopId = $routeParams.shopId;
+
+var refresh = function() {
+  $http.get('/shop/'+$scope.shopId).success(function(response) {
+    $scope.shop = response;
+  });
+  $http.get('/groupbuyByShopId/'+$scope.shopId).success(function(response) {
+    $scope.groupbuyList = response;
+  });
+
+};
+
+refresh();
+
+$scope.newGroupbuy = function() {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'newGroupBuy.html',
+      controller: 'newGroupBuyCtrl',
+      size: "lg",
+      resolve: {
+        shop: function () {
+          return $scope.shop;
+        },
+        gb: function () {
+          return null;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function () {
+     refresh();
+    }, function () {
+      //$log.info('Modal dismissed at: ' + new Date());
+    });
+};
+
+$scope.editGroupbuy = function(selected_gb) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'newGroupBuy.html',
+      controller: 'newGroupBuyCtrl',
+      size: "lg",
+      resolve: {
+        shop: function() {return null;},
+        gb: function() {return selected_gb;}
+      }
+    });
+    
+    modalInstance.result.then(function () {
+     refresh();
+    }, function () {
+      //$log.info('Modal dismissed at: ' + new Date());
+    });
+};
+
+$scope.editShop = function() {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: 'newShop.html',
+      controller: 'newShopCtrl',
+      size: "lg",
+      resolve: {
+          shop: function(){return $scope.shop;}
+      }
+    });
+    
+    modalInstance.result.then(function () {
+     refresh();
+    }, function () {
+      //$log.info('Modal dismissed at: ' + new Date());
+    });
+};
+
+$scope.removeGroupbuy = function(id) {
+  console.log(id);
+  var msg = "请确认删除这个团购";
+  var r = confirm(msg);
+  if (r == true) {
+    $http.delete('/groupbuy/' + id).success(function(response) {
+      refresh();
+    });
+  }
+};
+
+
+$scope.gotoGroupbuy = function(gid){
+    var order_url = "/order.html#/groupbuyId";
+
+    window.location.href = order_url+gid;   
+};
+
+
+
+$scope.gotoGroupbuyOrders = function(id) {
+    var shop_groupbuy_url = '/shop.html#/groupbuyId';
+    window.location.href = shop_groupbuy_url+id;   
+};
+
+
+}]);
 
 myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, shop, gb) {
 
@@ -45,19 +162,12 @@ myApp.controller('newGroupBuyCtrl', function ($scope, $http, $uibModalInstance, 
 });
 
 myApp.controller('newShopCtrl', function ($scope, $http, $uibModalInstance, shop) {
-    $scope.editMode = true;
-    if(shop == null)
-        $scope.editMode = false; 
+
     $scope.shop = shop;
     $scope.ok = function () {
       if($scope.editMode){
           console.log($scope.shop);
         $http.put('/shop/'+ $scope.shop._id, $scope.shop).success(function(response) {
-            console.log(response);
-         });
-      }
-      else{
-        $http.post('/shop', $scope.shop).success(function(response) {
             console.log(response);
          });
       }
@@ -68,138 +178,6 @@ myApp.controller('newShopCtrl', function ($scope, $http, $uibModalInstance, shop
     $uibModalInstance.dismiss('cancel');
   };
 });
-
-
-myApp.controller('AppCtrl', ['$scope', '$http', '$uibModal', '$log',function($scope, $http, $uibModal, $log) {
-var refresh = function() {
-  $http.get('/shop').success(function(response) {
-    $scope.shopList = response;
-  });
-  $http.get('/groupbuy').success(function(response) {
-    $scope.groupbuyList = response;
-  });
-  $scope.groupbuy = "";
-  $scope.shop = "";
-};
-
-refresh();
-
-$scope.newGroupbuy = function(selected_shop) {
-    var modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: 'newGroupBuy.html',
-      controller: 'newGroupBuyCtrl',
-      size: "lg",
-      resolve: {
-        shop: function () {
-          return selected_shop;
-        },
-        gb: function () {
-          return null;
-        }
-      }
-    });
-    
-    modalInstance.result.then(function () {
-     refresh();
-    }, function () {
-      //$log.info('Modal dismissed at: ' + new Date());
-    });
-};
-
-$scope.editGroupbuy = function(selected_gb) {
-    var modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: 'newGroupBuy.html',
-      controller: 'newGroupBuyCtrl',
-      size: "lg",
-      resolve: {
-        shop: function() {return null;},
-        gb: function() {return selected_gb;}
-      }
-    });
-    
-    modalInstance.result.then(function () {
-     refresh();
-    }, function () {
-      //$log.info('Modal dismissed at: ' + new Date());
-    });
-};
-
-$scope.newShop = function() {
-    var modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: 'newShop.html',
-      controller: 'newShopCtrl',
-      size: "lg",
-        resolve: {
-          shop: function(){return null;}
-      }
-    });
-    
-    modalInstance.result.then(function () {
-     refresh();
-    }, function () {
-      //$log.info('Modal dismissed at: ' + new Date());
-    });
-};
-
-
-
-$scope.editShop = function(selected_shop) {
-    var modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: 'newShop.html',
-      controller: 'newShopCtrl',
-      size: "lg",
-      resolve: {
-          shop: function(){return selected_shop;}
-      }
-    });
-    
-    modalInstance.result.then(function () {
-     refresh();
-    }, function () {
-      //$log.info('Modal dismissed at: ' + new Date());
-    });
-};
-$scope.removeShop = function(id) {
-  console.log(id);
-  var msg = "请确认删除这个厨房";
-  var r = confirm(msg);
-  if (r == true) {
-    $http.delete('/shop/' + id).success(function(response) {
-      refresh();
-    });
-  }
-};
-
-$scope.removeGroupbuy = function(id) {
-  console.log(id);
-  var msg = "请确认删除这个团购";
-  var r = confirm(msg);
-  if (r == true) {
-    $http.delete('/groupbuy/' + id).success(function(response) {
-      refresh();
-    });
-  }
-};
-
-
-$scope.create_groupbuyURL = function(gid){
-    var order_url = "/order.html#/groupbuyId";
-    return order_url+gid;
-};
-
-
-
-$scope.gotoGroupbuyOrders = function(id) {
-    var shop_groupbuy_url = '/shop.html#/groupbuyId';
-    window.location.href = shop_groupbuy_url+id;   
-};
-
-
-}]);
 
 
 

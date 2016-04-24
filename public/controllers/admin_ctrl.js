@@ -144,7 +144,11 @@ $scope.newShop = function() {
     });
 };
 
+$scope.gotoGroupBuyList = function(shopId) {
+    var shopId_url = '/shop.html#/shopId';
+    window.location.href = shopId_url+shopId;  
 
+};
 
 $scope.editShop = function(selected_shop) {
     var modalInstance = $uibModal.open({

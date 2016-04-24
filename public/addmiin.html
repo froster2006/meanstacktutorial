@@ -26,7 +26,8 @@
                     <td>{{shop.name}}</td>
                     <td>
                         <button class="btn btn-info" ng-click="editShop(shop)">Edit</button>
-                        <button class="btn btn-info" ng-click="newGroupbuy(shop)">Add Group buy</button>
+                        <button class="btn btn-info" ng-click="newGroupbuy(shop)">Add Groupbuy</button>
+                        <button class="btn btn-info" ng-click="gotoGroupBuyList(shop._id)">Groupbuys</button>   
                         <button class="btn btn-danger" ng-click="removeShop(shop._id)">Remove</button>
                     </td>
                 </tr>

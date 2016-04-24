@@ -1,15 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute','ngAnimate','ui.bootstrap','toggle-switch']);
-
-myApp.config(function($routeProvider, $locationProvider) {
-  $routeProvider
-   .when('/groupbuyId:gid', {
-        templateUrl: 'group_detail.html',
-        controller: 'shopCtrl'
-  });
-
-});
-
-myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route','$uibModal',function($scope, $http, $log, $routeParams,$route,$uibModal) {
+myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','$uibModal',function($scope, $http, $log, $routeParams,$route,$uibModal) {
     $scope.groupbuyId = $routeParams.gid;
     
     var init = function(id) {
