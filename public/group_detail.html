@@ -1,6 +1,5 @@
 <h1><a ng-href="{{create_groupbuyURL()}}">{{groupbuy.title}}</a></h1>
 <br>
-<button class="btn btn-info" ng-click="editGroupbuy()">编辑团购</button>
 <button class="btn btn-info" ng-click="refresh()">刷新</button>
 <button class="btn btn-danger" ng-click="addOrder()">添加订单</button>
 <toggle-switch class="switch-success" ng-model="switchStatus" ng-click="toggle()"></toggle-switch>
@@ -73,8 +72,6 @@
             </div>
         </div>
         <div class="modal-body">
-            <h3>{{groupbuy.title}}</h3>
-
             微信名字
             <input class="form-control" ng-model="order.name"> 
             E-mail
@@ -106,36 +103,3 @@
         </div>
     </script>
 </div>
-
-        <div ng-controller="shopCtrl">
-            <script type="text/ng-template" id="editGroupBuy.html">
-                <div class="modal-header">
-                    <h3 class="modal-title">编辑团购</h3>
-                </div>
-                <div class="modal-body">
-                    团购标题
-                    <input class="form-control" ng-model="groupbuy.title"> 
-                    团购描述
-                    <textarea class="form-control" rows="3" ng-model="groupbuy.description"></textarea>
-                    照片链接
-                    <input class="form-control" ng-model="groupbuy.photoLink">
-                    批次
-                    <input class="form-control" ng-model="groupbuy.batchId">
-                    <div data-ng-repeat="item in items">
-                        产品名
-                        <input class="form-control" ng-model="items[$index].item_name" ng-disabled=true>
-                        价格
-                        <input class="form-control" ng-model="items[$index].item_price">
-                        库存
-                        <input class="form-control" ng-model="items[$index].stock_count">
-
-                    </div>
-                     
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" ng-click="ok()">保存</button>
-                    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
-                </div>
-            </script>
-        </div>
-        

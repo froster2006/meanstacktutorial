@@ -140,55 +140,7 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
     {
         $scope.totalOrderItemCount = {};
     };
-
-    $scope.editGroupbuy = function()
-    {
-        var modalInstance = $uibModal.open({
-          animation: true,
-          templateUrl: 'editGroupBuy.html',
-          controller: 'editGroupBuyCtrl',
-          size: "lg",
-          resolve: {
-            gb: function() {return $scope.groupbuy;}
-          }
-    });
-    
-    modalInstance.result.then(function () {
-        init($scope.groupbuyId);
-    }, function () {
-      //$log.info('Modal dismissed at: ' + new Date());
-    });
-
-    };
-
-
 }]);
-
-
-
-myApp.controller('editGroupBuyCtrl', function ($scope, $http, $uibModalInstance,gb) {
-
-    $scope.groupbuy = gb;
-    console.log($scope.groupbuy);
-    $scope.items = [];
-    $scope.items = $scope.groupbuy.items;
-
-
-    $scope.ok = function () {
-        $scope.groupbuy.items = $scope.items;
-
-        $http.put('/groupbuy/'+$scope.groupbuy._id, $scope.groupbuy).success(function(response) {
-                //console.log(response);
-        });
-
-    $uibModalInstance.close();
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-});
-
 
 myApp.controller('newOrderCtrl', function ($scope, $http, $uibModalInstance, gb, order,gbBatchIds, currentBatchId) {
 
