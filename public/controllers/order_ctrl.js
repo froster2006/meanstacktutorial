@@ -40,12 +40,23 @@ myApp.controller('orderCtrl', ['$scope', '$http',  '$log','$routeParams','$route
         $scope.order.pickedup = false;
         $scope.order.batchId = $scope.groupbuy.batchId;
         var total_count = 0;
+        var hasInvalidNumber = false;
         for(i = 0;i<$scope.order.items.length;i++){
+            if(isNaN($scope.order.items[i].item_count)) {
+                hasInvalidNumber = true;
+                break;
+            }
             total_count += $scope.order.items[i].item_count;
         }
         //console.log($scope.order);
         $scope.submit_check_message="";
-        if(total_count === 0){
+        console.log(hasInvalidNumber)
+        if(hasInvalidNumber === true)
+        {
+            $scope.submit_check_message="订购数量请只填写数字";
+            $scope.hasError = true;
+        }
+        else if(total_count === 0){
             $scope.submit_check_message="订单数不能为0";
             $scope.hasError = true;
         }

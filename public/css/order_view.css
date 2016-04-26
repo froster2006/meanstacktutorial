@@ -8,13 +8,26 @@ body {
    font-size: 70%; /* Make it twice as large */
 }
 
+.warning {
+    color: white;
+   font-size: 100%; /* Make it twice as large */
+   background-color: #d9534f;
+   width:100%;
+}
 body {
     font-family: "Microsoft YaHei", "Arial", "Verdana", "Tahoma";
     color: #424242;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, {
     font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Arial", "Verdana", "Tahoma";
     font-weight: 500;
 }
 
+input{
+    width: 100%;
+}
+
+button {
+    width:100%;
+}
