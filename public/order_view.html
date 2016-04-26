@@ -6,46 +6,53 @@
         <title>{{groupbuy.title}} 已截止</title>
     </div>
 </head>
-<body>
-<div ng-if="groupbuyON == true">
-    <h1>{{groupbuy.batchId}}{{groupbuy.title}}</h1>
-</div> 
-<div ng-if="groupbuyON == false">
-    <h1>{{groupbuy.batchId}}{{groupbuy.title}} 已截止</h1>
-</div> 
-<div class="row">
-<div class="col-xs-12 col-sm-12 col-lg-8">
-    <img src="{{groupbuy.photoLink}}"></img>
-    <br>
-    <h2>
-        {{groupbuy.description}}
-        <br>
-        <br>
-        <div ng-show="groupbuyON">
-            微信名字<span class="star">&#x2605</span><br>
-            <input class="form-contrl" type="text" ng-model="order.name"><br><br>
-            E-mail (选填)<br>
-            <input class="form-contrl" type="email" ng-model="order.email"> <br><br>
-            电话<span class="star">&#x2605</span><br>
-            <input class="form-contrl" type="tel" ng-model="order.phone_number"><br><br>
-            
-            <div data-ng-repeat="item in groupbuy.items">
-                {{item.item_name}} 价格: {{item.item_price}}<br>
-                <input class="form-contrl" type="tel" ng-init="orderItem[$index].item_count=0" value=0 ng-model="orderItem[$index].item_count" placeholder="订购数量"><br><br>
-            </div>
 
-            备注<br>
-            <input class="form-contrl" type="text" ng-model="order.notes">
-            <br><br>
-            <div role="alert">
-                <span class="label label-danger" ng-show="hasError">{{submit_check_message}}</span>
+<body>
+    <div class="panel panel-info container-fluid col-lg-12">
+        <div class="panel-heading" style="padding-left: 5;font-weight: bold;">
+            <div ng-if="groupbuyON == true">
+                <h3>{{groupbuy.batchId}}{{groupbuy.title}}</h3>
             </div>
-            <br>
-        <button class="btn btn-primary btn-lg" type="button" ng-click="submit_order()">提交订单</button>
-        <br>
-        <br>
+            <div ng-if="groupbuyON == false">
+                <h3>{{groupbuy.batchId}}{{groupbuy.title}} 已截止</h3>
+            </div>
         </div>
-    </h2>
-</div>
-</div>
+        <div class="panel-body">
+            <img src="{{groupbuy.photoLink}}" class="img-responsive img-thumbnail"></img>
+            <br> {{groupbuy.description}}
+            <br>
+            <br>
+            <div ng-show="groupbuyON">
+                <div class="row">
+                    <label>微信名字<span class="star">&#x2605</span></label><br>
+                    <input class="form-contrl" type="text" ng-model="order.name">
+                </div>
+                <br>
+                <div class="row">
+                    <label>电话<span class="star">&#x2605</span></label><br>
+                    <input class="form-contrl" type="tel" ng-model="order.phone_number">
+                </div>
+                <br>
+                <div data-ng-repeat="item in groupbuy.items">
+                    <div class="row">
+                        <lable>{{item.item_name}} 价格: {{item.item_price}}</lable><br>
+                        <input class="form-contrl" type="tel" ng-init="orderItem[$index].item_count=0" value=0 ng-model="orderItem[$index].item_count" placeholder="订购数量">
+                    </div>
+                    <br>
+                </div>
+                
+                <div class="row">
+                    <label>备注</label><br>
+                    <input class="form-contrl" type="text" ng-model="order.notes">
+                </div>
+                <br>
+                <div class="row">
+                    <div role="alert">
+                        <span class="label label-danger" ng-show="hasError">{{submit_check_message}}</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-lg" type="button" ng-click="submit_order()">提交订单</button>
+            </div>
+        </div>
+    </div>
 </body>

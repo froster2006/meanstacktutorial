@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
-
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+        <style>
+            .smImage {width:96px}
+            input.ng-dirty.ng-invalid{border:1px solid red};
+            span.highlight{color:red}
+            .col-lg-12{  padding-left: 5;  padding-right: 0;}
+        </style>
+</head>
 <body>
-    <div class="container-fluid">
-        <div ng-app="myApp">
-			<div ng-view>
-			</div>
-        </div>
+     <div ng-app="myApp">
+		<div ng-view>
+		</div>
 	</div>
 	<!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">

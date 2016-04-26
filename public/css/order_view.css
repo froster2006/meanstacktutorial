@@ -2,9 +2,6 @@ body {
     background-color: lightyellow;
 }
 
-input[type="text"] {
-    font-size:25px
-}
 
 .star {
    color: red; /* Make it red */
@@ -21,8 +18,3 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 500;
 }
 
-.text {
-    font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Arial", "Verdana", "Tahoma";
-    font-weight: bold;
-    font-size:15px;
-}
