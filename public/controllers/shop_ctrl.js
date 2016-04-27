@@ -1,19 +1,3 @@
-var myApp = angular.module('myApp', ['ngRoute','ngAnimate','ui.bootstrap','toggle-switch']);
-
-myApp.config(function($routeProvider, $locationProvider) {
-  $routeProvider
-   .when('/groupbuyId:gid', {
-        templateUrl: 'group_detail.html',
-        controller: 'gbCtrl'
-  })
-   .when('/shopId:shopId', {
-        templateUrl: 'shop_detail.html',
-        controller: 'shopCtrl'   
-
-   });
-});
-
-
 myApp.controller('shopCtrl', ['$scope', '$http',  '$log','$routeParams','$route','$uibModal',function($scope, $http, $log, $routeParams,$route,$uibModal) {
     $scope.shopId = $routeParams.shopId;
 
@@ -114,6 +98,11 @@ $scope.gotoGroupbuyOrders = function(id) {
     window.location.href = shop_groupbuy_url+id;   
 };
 
+$scope.gotoGroupbuyOrders_table = function(id) {
+    var shop_groupbuy_url = '/shop.html#/table/groupbuyId';
+    window.location.href = shop_groupbuy_url+id;   
+};
+
 
 }]);
 
@@ -168,10 +157,7 @@ myApp.controller('newShopCtrl', function ($scope, $http, $uibModalInstance, shop
         $http.put('/shop/'+ $scope.shop._id, $scope.shop)
         .success(function(response) {
             console.log(response);
-         })
-        .error(function(response){ 
-          console.log(response);
-        });
+         });
         $uibModalInstance.close();
     };
   

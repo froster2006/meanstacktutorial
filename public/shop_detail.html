@@ -13,7 +13,8 @@
     <uib-accordion-group heading="{{gb.batchId}}{{gb.title}}" is-open="false" ng-repeat="gb in groupbuyList">
         <button class="btn btn-info" ng-click="editGroupbuy(gb)">编辑团购</button>
         <button class="btn btn-info" ng-click="gotoGroupbuy(gb._id)">团购链接</button> 
-        <button class="btn btn-info" ng-click="gotoGroupbuyOrders(gb._id)">团购后台</button>
+        <button class="btn btn-info" ng-click="gotoGroupbuyOrders(gb._id)">手机后台</button>
+        <button class="btn btn-info" ng-click="gotoGroupbuyOrders_table(gb._id)">表格后台</button>
         <button class="btn btn-danger" ng-click="removeGroupbuy(gb._id)">删除团购</button>
     </uib-accordion-group>   
 </uib-accordion>

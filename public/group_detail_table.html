@@ -1,0 +1,100 @@
+<h3><a ng-href="{{create_groupbuyURL()}}">{{groupbuy.title}}</a></h3>
+<br>
+<button class="btn btn-info" ng-click="refresh()">刷新</button>
+<button class="btn btn-danger" ng-click="addOrder()">添加订单</button>
+<toggle-switch class="switch-success" ng-model="switchStatus" ng-click="toggle()"></toggle-switch>
+<br><br>
+<span class="text">批次</span>
+<select ng-model="selectedBatchId" ng-change="refresh()" >
+    <option ng-repeat="bid in groupbuyBatchIdArray" value="{{bid}}">{{bid}}</option>
+</select>
+<br><br>
+
+<div class="col-sm-3 col-md-3 input-group">
+    <input type="text" class="form-control" placeholder="请输入电话后四位..." ng-model="searchPhone">
+    <div class="input-group-btn">
+        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+    </div>
+</div>
+
+<br>
+
+<table class="table table-striped table-responsive" ng-init="tableInit()">
+<thead>
+    <tr>
+    <th>订单时间</th>
+    <th>微信名</th>
+    <th>电话</th>
+    <th ng-repeat-start="item in groupbuy.items" ng-repeat-end>{{item.item_name}}</th>
+    <th>备注</th>
+    <th>操作</th>
+    </tr>
+</thead>
+<tbody>
+    <tr class="warning totalRow">
+        <td>总计</td>
+        <td></td>
+    <td></td>
+        <td ng-repeat-start="soi in totalOrderItemCount" ng-repeat-end>{{soi}}</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr ng-repeat="order in orders |orderBy:'timestamp' |filter:{phone_number:searchPhone}" ng-class="highlightRow(order)">
+        <td>{{order.timestamp | date:'yyyy-MM-dd HH:mm'}}</td>
+        <td>{{order.name}}</td>
+        <td>{{order.phone_number}}</td>
+        <td ng-repeat-start="oi in order.items" ng-init="totalOrderItemCount[oi.item_name] = +totalOrderItemCount[oi.item_name] + +oi.item_count" ng-repeat-end>
+            {{oi.item_count}}</td>
+        <td>{{order.notes}}</td>
+        <td>
+            <button class="btn btn-info" ng-click="editOrder(order)">编辑</button>
+            <button class="btn btn-danger" ng-click="removeOrder(order)">删除</button>
+        </td>
+    </tr>
+</tbody>
+</table>
+
+
+
+
+<!-- Modal -->
+<div ng-controller="shopCtrl">
+    <script type="text/ng-template" id="newOrder.html">
+        <div class="modal-header">
+            <div ng-if="editMode == true">
+                <h3 class="modal-title">编辑订单</h3>
+            </div>
+            <div ng-if="editMode != true">
+                <h3 class="modal-title">新订单</h3>
+            </div>
+        </div>
+        <div class="modal-body">
+            微信名字
+            <input class="form-control" ng-model="order.name"> 
+            电话(xxx-xxx-xxxx)
+            <input class="form-control" ng-model="order.phone_number">
+            
+            <div data-ng-repeat="item in groupbuy.items">
+                {{item.item_name}} price: {{item.item_price}}<br>
+                <div ng-if="editMode == true">
+                    订购数量: <input class="form-control" ng-model="orderItem[$index].item_count">
+                </div>
+                <div ng-if="editMode == false">
+                    订购数量: <input class="form-control" ng-init="orderItem[$index].item_count=0" value=0 ng-model="orderItem[$index].item_count">
+                </div>
+            </div>
+            备注
+            <input class="form-control" ng-model="order.notes">
+            批次 
+            <select ng-model="selectedBatchId">
+                <option ng-repeat="bid in gbBatchIds" value="{{bid}}">{{bid}}</option>
+            </select>
+        <div class="modal-footer"> 
+            <div ng-if="editMode == true && order.pickedup == true" style="float:left">
+                <button class="btn btn-danger" type="button" ng-click="unpickup()">恢复提货</button>
+            </div>
+            <button class="btn btn-primary" type="button" ng-click="ok()">保存</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+        </div>
+    </script>
+</div>
