@@ -3,7 +3,7 @@
 <button class="btn btn-info" ng-click="refresh()">刷新</button>
 <button class="btn btn-danger" ng-click="addOrder()">添加订单</button>
 <toggle-switch class="switch-success" ng-model="switchStatus" ng-click="toggle()"></toggle-switch>
-
+<br><br>
 <span class="text">批次</span>
 <select ng-model="selectedBatchId" ng-change="refresh()" >
     <option ng-repeat="bid in groupbuyBatchIdArray" value="{{bid}}">{{bid}}</option>
