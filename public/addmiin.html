@@ -4,16 +4,50 @@
 <head>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+
     <title>Maiduo</title>
+    <style>
+        .smImage {width:96px}
+        .col-lg-12{  padding-left: 5;  padding-right: 5;}
+    </style>
 </head>
 
 <body>
-    <div class="container" ng-controller="AppCtrl">
+    <div class="container-fluid col-lg-12" ng-controller="AppCtrl">
         <h1>Maiduo Admin Panel</h1>
         <h2>Shops</h2>
         <button class="btn btn-warning" ng-click="newShop()">Add Shop</button>
+        <br>
+<!--        
+        <div ng-repeat="shop in shopList">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">{{shop.name}}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <button class="btn btn-info" ng-click="editShop(shop)">Edit</button>
+                            <button class="btn btn-info" ng-click="gotoGroupBuyList(shop._id)">Groupbuys</button>   
+                            <button class="btn btn-danger" ng-click="removeShop(shop._id)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+-->
+
+  <uib-accordion close-others="true">
+    <uib-accordion-group heading="{{shop.name}}" is-open="false" ng-repeat="shop in shopList">
+        <button class="btn btn-info" ng-click="editShop(shop)">Edit</button>
+        <button class="btn btn-info" ng-click="gotoGroupBuyList(shop._id)">Groupbuys</button>   
+        <button class="btn btn-danger" ng-click="removeShop(shop._id)">Remove</button>
+    </uib-accordion-group>   
+  </uib-accordion>
+
+<!--
         <table class="table">
             <thead>
                 <tr>
@@ -32,7 +66,7 @@
                 </tr>
             </tbody>
         </table>
-
+-->
         <!-- Modal -->
         
         <div ng-controller="AppCtrl">
@@ -64,10 +98,11 @@
         </div>
     </div>
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
     <script src="controllers/admin_ctrl.js"></script>
 </body>
 
