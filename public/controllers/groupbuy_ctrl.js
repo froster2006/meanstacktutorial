@@ -16,19 +16,26 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
                 $scope.selectedBatchId=$scope.groupbuyBatchIdArray[0];
                 $http.get('/orderBybatchId/' + id+ '/'+$scope.selectedBatchId).success(function(response) {
                     $scope.orders = response;
+                    $scope.totalItemCount={};
                     $scope.wechat_msg ="";
                     for(var i = 0;i<$scope.orders.length;i++)
                     {
+                        $scope.totalItemCount[$scope.orders[i].item_name] = +$scope.totalItemCount[$scope.orders[i].item_name] + +$scope.orders[i].item_count;
                         if(!$scope.orders[i].pickedup)
                             $scope.wechat_msg +="@" + $scope.orders[i].name + " ";
+                        //console.log($scope.totalItemCount);
                     }
                     if($scope.wechat_msg !="")
                         $scope.wechat_msg +="可以来提货了 谢谢";
+                    //console.log($scope.totalItemCount);
                 });
             });
         });
+
     };
+
     init($scope.groupbuyId);
+
 
     $scope.create_groupbuyURL = function(){
         var order_url = "/order.html#/groupbuyId";
@@ -43,7 +50,7 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
         $http.put('/togglegroupbuy/' + $scope.groupbuy._id, status).success(function(response) {
             
         });
-        $scope.refresh();
+        refresh();
     }
 
     $scope.removeOrder = function(order) 
@@ -56,20 +63,20 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
             });
         } 
 
-        $scope.refresh();
+        refresh();
     };
     
     $scope.pickupOrder = function(id) 
     {
         $http.put('/pickuporder/' + id ).success(function(response) {
-            $scope.refresh();
+            refresh();
         });
         
     };
     $scope.highlightRow = function(order)
     {
         if(order.pickedup)
-            return "success";
+            return "panel-success";
         else
             return "";
     }
@@ -89,27 +96,33 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
         });
     
         modalInstance.result.then(function () {
-         $scope.refresh();
+         refresh();
         }, function () {
           //$log.info('Modal dismissed at: ' + new Date());
         });
 
     };
     
-    $scope.refresh = function() {
+    var refresh = function() {
 
         $http.get('/orderBybatchId/' + $scope.groupbuy._id+ '/'+$scope.selectedBatchId).success(function(response) {
                 $scope.orders = response;
+                _orders = response;
                 $scope.wechat_msg ="";
+                $scope.totalItemCount = {};
                 for(var i = 0;i<$scope.orders.length;i++) {
+                    $scope.totalItemCount[$scope.orders[i].item_name] = +$scope.totalItemCount[$scope.orders[i].item_name] + +$scope.orders[i].item_count;
                     if(!$scope.orders[i].pickedup)
                         $scope.wechat_msg +="@" + $scope.orders[i].name + " ";
                 }
                 if($scope.wechat_msg !="")
                     $scope.wechat_msg +="可以来提货了 谢谢";
+                //console.log($scope.totalItemCount);
+                
         });
         $scope.tableInit();
     };
+
     $scope.selectTextArea =function($event)
     {
          $event.target.select();
@@ -130,7 +143,7 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
         });
         
         modalInstance.result.then(function () {
-         $scope.refresh();
+         refresh();
         }, function () {
           //$log.info('Modal dismissed at: ' + new Date());
         });
@@ -160,7 +173,7 @@ myApp.controller('newOrderCtrl', function ($scope, $http, $uibModalInstance, gb,
       if($scope.editMode) {
         $scope.order.batchId = $scope.selectedBatchId;
         $http.put('/order/'+$scope.order._id, $scope.order).success(function(response) {
-                console.log(response);
+                //console.log(response);
         });
       } else {
         $scope.order.batchId = $scope.selectedBatchId;
@@ -172,9 +185,9 @@ myApp.controller('newOrderCtrl', function ($scope, $http, $uibModalInstance, gb,
             $scope.order.items[i].item_name = $scope.groupbuy.items[i].item_name;
             $scope.order.items[i].item_price = $scope.groupbuy.items[i].item_price;
         }
-        console.log($scope.order);
+        //console.log($scope.order);
         $http.post('/order', $scope.order).success(function(response) {
-            console.log(response._id);
+            //console.log(response._id);
          });
       }
      
