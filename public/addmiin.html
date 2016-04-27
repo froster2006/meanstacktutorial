@@ -15,61 +15,21 @@
 
 <body>
     <div class="container-fluid col-lg-12" ng-controller="AppCtrl">
-        <h1>Maiduo Admin Panel</h1>
-        <h2>Shops</h2>
+        <h2>Admin Panel</h2>
+        <h3>Shops</h3>
         <button class="btn btn-warning" ng-click="newShop()">Add Shop</button>
         <br>
-<!--        
-        <div ng-repeat="shop in shopList">
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#collapse1">{{shop.name}}</a>
-                        </h4>
-                    </div>
-                    <div id="collapse1" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <button class="btn btn-info" ng-click="editShop(shop)">Edit</button>
-                            <button class="btn btn-info" ng-click="gotoGroupBuyList(shop._id)">Groupbuys</button>   
-                            <button class="btn btn-danger" ng-click="removeShop(shop._id)">Remove</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
--->
 
-  <uib-accordion close-others="true">
-    <uib-accordion-group heading="{{shop.name}}" is-open="false" ng-repeat="shop in shopList">
-        <button class="btn btn-info" ng-click="editShop(shop)">Edit</button>
-        <button class="btn btn-info" ng-click="gotoGroupBuyList(shop._id)">Groupbuys</button>   
-        <button class="btn btn-danger" ng-click="removeShop(shop._id)">Remove</button>
-    </uib-accordion-group>   
-  </uib-accordion>
 
-<!--
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Shop</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="shop in shopList">
-                    <td>{{shop.name}}</td>
-                    <td>
-                        <button class="btn btn-info" ng-click="editShop(shop)">Edit</button>
-                        <button class="btn btn-info" ng-click="gotoGroupBuyList(shop._id)">Groupbuys</button>   
-                        <button class="btn btn-danger" ng-click="removeShop(shop._id)">Remove</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
--->
+          <uib-accordion close-others="true">
+            <uib-accordion-group heading="{{shop.name}}" is-open="false" ng-repeat="shop in shopList">
+                <button class="btn btn-info" ng-click="editShop(shop)">Edit</button>
+                <button class="btn btn-info" ng-click="gotoGroupBuyList(shop._id)">Groupbuys</button>   
+                <button class="btn btn-danger" ng-click="removeShop(shop._id)">Remove</button>
+            </uib-accordion-group>   
+          </uib-accordion>
+
         <!-- Modal -->
-        
         <div ng-controller="AppCtrl">
             <script type="text/ng-template" id="newShop.html">
                 <div class="modal-header">
@@ -98,6 +58,7 @@
             </script>
         </div>
     </div>
+    
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>

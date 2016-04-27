@@ -165,14 +165,16 @@ myApp.controller('newShopCtrl', function ($scope, $http, $uibModalInstance, shop
 
     $scope.shop = shop;
     $scope.ok = function () {
-      if($scope.editMode){
-          console.log($scope.shop);
-        $http.put('/shop/'+ $scope.shop._id, $scope.shop).success(function(response) {
+        $http.put('/shop/'+ $scope.shop._id, $scope.shop)
+        .success(function(response) {
             console.log(response);
-         });
-      }
-    $uibModalInstance.close();
-  };
+         })
+        .error(function(response){ 
+          console.log(response);
+        });
+        $uibModalInstance.close();
+    };
+  
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');

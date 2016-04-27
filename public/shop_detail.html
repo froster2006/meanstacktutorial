@@ -1,8 +1,24 @@
-<h1>{{shop.name}}管理平台</h1>
+<!--
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+-->
+<h2>{{shop.name}}管理平台</h2>
 <button class="btn btn-info" ng-click="editShop()">编辑商店</button>
 <button class="btn btn-info" ng-click="newGroupbuy()">新的团购</button>
 
-<h2>Groupbuys</h2>
+<h3>Groupbuys</h3>
+
+<uib-accordion close-others="true">
+    <uib-accordion-group heading="{{gb.batchId}}{{gb.title}}" is-open="false" ng-repeat="gb in groupbuyList">
+        <button class="btn btn-info" ng-click="editGroupbuy(gb)">编辑团购</button>
+        <button class="btn btn-info" ng-click="gotoGroupbuy(gb._id)">团购链接</button> 
+        <button class="btn btn-info" ng-click="gotoGroupbuyOrders(gb._id)">团购后台</button>
+        <button class="btn btn-danger" ng-click="removeGroupbuy(gb._id)">删除团购</button>
+    </uib-accordion-group>   
+</uib-accordion>
+
+<!--
 <table class="table">
     <thead>
         <tr>
@@ -22,6 +38,7 @@
         </tr>
     </tbody>
 </table>
+-->
 <!-- Modal -->
 <div ng-controller="shopCtrl">
     <script type="text/ng-template" id="newGroupBuy.html">
@@ -69,9 +86,12 @@
         </div>
         <div class="modal-body">
             商店名称
-            <input class="form-control" ng-model="shop.name"> email
-            <input class="form-control" ng-model="shop.email"> 电话
-            <input class="form-control" ng-model="shop.phone_number"> 地址
+            <input class="form-control" ng-model="shop.name"> 
+            email
+            <input class="form-control" ng-model="shop.email"> 
+            电话
+            <input class="form-control" ng-model="shop.phone_number"> 
+            地址
             <input class="form-control" ng-model="shop.address">
         </div>
         <div class="modal-footer">
