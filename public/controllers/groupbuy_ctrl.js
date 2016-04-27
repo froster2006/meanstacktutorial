@@ -50,7 +50,7 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
         $http.put('/togglegroupbuy/' + $scope.groupbuy._id, status).success(function(response) {
             
         });
-        refresh();
+        $scope.refresh();
     }
 
     $scope.removeOrder = function(order) 
@@ -63,13 +63,13 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
             });
         } 
 
-        refresh();
+        $scope.refresh();
     };
     
     $scope.pickupOrder = function(id) 
     {
         $http.put('/pickuporder/' + id ).success(function(response) {
-            refresh();
+            $scope.refresh();
         });
         
     };
@@ -96,14 +96,14 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
         });
     
         modalInstance.result.then(function () {
-         refresh();
+         $scope.refresh();
         }, function () {
           //$log.info('Modal dismissed at: ' + new Date());
         });
 
     };
     
-    var refresh = function() {
+    $scope.refresh = function() {
 
         $http.get('/orderBybatchId/' + $scope.groupbuy._id+ '/'+$scope.selectedBatchId).success(function(response) {
                 $scope.orders = response;
@@ -143,7 +143,7 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
         });
         
         modalInstance.result.then(function () {
-         refresh();
+         $scope.refresh();
         }, function () {
           //$log.info('Modal dismissed at: ' + new Date());
         });
