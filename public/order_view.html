@@ -21,8 +21,10 @@
         <form name="orderForm">
             <img src="{{groupbuy.photoLink}}" class="img-responsive img-thumbnail"></img>
             <br> {{groupbuy.description}}
-            <br>
-            <br>
+            <div ng-repeat="pic in groupbuy.photoLinks">
+                <img src="{{pic}}" class="img-responsive img-thumbnail"></img><br>
+            </div>
+            <br><br>
             <div ng-show="groupbuyON">
                 <div class="row">
                     <label>微信名字<span class="star">&#x2605</span></label>
