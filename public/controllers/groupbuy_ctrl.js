@@ -172,6 +172,10 @@ myApp.controller('newOrderCtrl', function ($scope, $http, $uibModalInstance, gb,
     $scope.ok = function () {
       if($scope.editMode) {
         $scope.order.batchId = $scope.selectedBatchId;
+        for(i = 0;i<$scope.groupbuy.items.length;i++){
+            $scope.order.items[i].item_name = $scope.groupbuy.items[i].item_name;
+            $scope.order.items[i].item_price = $scope.groupbuy.items[i].item_price;
+        }
         $http.put('/order/'+$scope.order._id, $scope.order).success(function(response) {
                 //console.log(response);
         });
