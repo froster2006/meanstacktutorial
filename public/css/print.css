@@ -2,3 +2,7 @@
 .noPrint {
     display: none;
 }
+@page {
+	size: landscape;
+
+}  
