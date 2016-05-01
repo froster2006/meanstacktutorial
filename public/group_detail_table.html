@@ -2,13 +2,13 @@
 <h3><a ng-href="{{create_groupbuyURL()}}">{{groupbuy.title}}</a></h3>
 <br>
 <button class="btn btn-info noPrint" ng-click="refresh()">刷新</button>
-<button class="btn btn-info noPrint" ng-click="print()">打印</button>
 <button class="btn btn-warning noPrint" ng-click="addOrder()">添加订单</button>
-<toggle-switch class="switch-success noPrint" ng-model="switchStatus" ng-click="toggle()"></toggle-switch>
+<toggle-switch class="switch-success noPrint" ng-model="switchStatus" ng-click="toggle()"></toggle-switch><br><br>
 <span class="text">批次</span>
 <select ng-model="selectedBatchId" ng-change="refresh()">
     <option ng-repeat="bid in groupbuyBatchIdArray" value="{{bid}}">{{bid}}</option>
 </select>
+<button class="btn btn-info noPrint" ng-click="print()">打印</button>
 <br><br>
 
 <table class="table table-striped table-responsive" ng-init="tableInit()">
