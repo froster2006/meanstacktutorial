@@ -36,6 +36,10 @@ myApp.controller('gbCtrl', ['$scope', '$http',  '$log','$routeParams','$route','
 
     init($scope.groupbuyId);
 
+    $scope.print = function()
+    {
+        window.print();
+    };
 
     $scope.create_groupbuyURL = function(){
         var order_url = "/order.html#/groupbuyId";
