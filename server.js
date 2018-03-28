@@ -11,6 +11,10 @@ var bodyParser = require('body-parser');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
+app.get('/', function(req, res){
+    res.sendfile('index.html', { root:  'public/home/' } );
+});
+
 app.get('/shop', function(req,res) {
   //console.log('list all shops');
   db.maiduo_shop.find(function(err,docs) {
@@ -221,5 +225,5 @@ app.get('/orderBybatchId/:gid/:bid', function (req, res) {
   });
 });
 
-app.listen(3000);
-console.log("Server running on port 3000");
+app.listen(80);
+console.log("Server running on port 80");
