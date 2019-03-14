@@ -35,6 +35,12 @@ var refresh = function() {
   $http.get('/groupbuy').success(function(response) {
     $scope.groupbuyList = response;
   });
+
+  $http.get('https://so9sbt87mb.execute-api.us-east-1.amazonaws.com/default/helloWorldPython').success(function(response) {
+    $scope.testMsg = response;
+  });
+
+
   $scope.groupbuy = "";
   $scope.shop = "";
 };

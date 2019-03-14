@@ -7,9 +7,12 @@ var db = mongojs('maiduo', ['maiduo_shop','maiduo_order','maiduo_groupbuy']);
 //var mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost/contactlist');
 var bodyParser = require('body-parser');
+var cors = require('cors')
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.get('/', function(req, res){
     res.sendfile('index.html', { root:  'public/home/' } );
